@@ -1,10 +1,10 @@
 using UnityEngine;
 
-// ¸Ê ±¸¼º¿ä¼Ò / ¸ÊÀ» Á¤ÀÇÇÏ±âÀ§ÇÑ ScriptableObject
+// ë§µ êµ¬ì„±ìš”ì†Œ / ë§µì„ ì •ì˜í•˜ê¸°ìœ„í•œ ScriptableObject
 [CreateAssetMenu(fileName = "MapData", menuName = "Scriptable Object Asset/Map Data")]
 public class Maptile : ScriptableObject
 {
-    // ¸Ê Á¤º¸ ¹× ¼³Á¤
+    // ë§µ ì •ë³´ ë° ì„¤ì •
     public GameObject tile;
     [Range(0, 10)]
     public int numberOfItem = 2;
@@ -18,25 +18,25 @@ public class Maptile : ScriptableObject
     [System.Serializable]
     public struct Map
     {
-        public Sprite tileImage;   // ¸ÊÅ¸ÀÏ ÀÌ¹ÌÁö
-        public int useFreq;         // ¸ÊÅ¸ÀÏ ÀÌ¹ÌÁö »ç¿ë ºóµµ
-        public int tileNum;
+        public Sprite tileImage;   // ë§µíƒ€ì¼ ì´ë¯¸ì§€
+        public int useFreq;         // ë§µíƒ€ì¼ ì´ë¯¸ì§€ ì‚¬ìš© ë¹ˆë„
+        public int tileNum; // ë§µíƒ€ì¼ ê³ ìœ  ìˆ«ì
     }
 
     //public Map[] maptileBlock;
    // public Map[] maptileWall;
-    public int width, height, chanceToStartAlive;
-    public Sprite[] spriteSet;
+    public int width, height, chanceToStartAlive;   // ë°°ì¹˜ëœ ì¢Œí‘œ
+    public Sprite[] spriteSet;  // ìŠ¤í”„ë¼ì´íŠ¸ ì„¤ì •ìš©
 
 
-    // ¸ó½ºÅÍ Á¤º¸
+    // ëª¬ìŠ¤í„° ì •ë³´
     [System.Serializable]
     public struct MonsterData
     {
-        public string monsterName;     // ¸ó½ºÅÍ ÀÌ¸§
+        public string monsterName;     // ëª¬ìŠ¤í„° ì´ë¦„
         public string monsterCode;
 
-        public Sprite[] monsterImage;     // ¸ó½ºÅÍ ÀÌ¹ÌÁö
+        public Sprite[] monsterImage;     // ëª¬ìŠ¤í„° ì´ë¯¸ì§€
         public int count;
         [TextArea(10, 20)]
         public string infoText;
