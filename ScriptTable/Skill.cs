@@ -8,15 +8,15 @@ using UnityEngine.UI;
 [CreateAssetMenu(fileName = "SkillName", menuName = "Scriptable Object Asset/SkillData")]
 public class Skill : ScriptableObject
 {
-    //ÀÌ¸§
-    //°ø°İ Á¾·ù
-    //¹üÀ§
-    //ÃÖ´ë È÷Æ® ¼ö
-    //µ¥¹ÌÁö
-    //¿¡´Ï¸ŞÀÌ¼Ç
-    //ÀÌÆåÆ®
-    //½ºÅ³»ç¿ëÈÄ À§Ä¡
-    //Á¤º¸
+    //ì´ë¦„
+    //ê³µê²© ì¢…ë¥˜
+    //ë²”ìœ„
+    //ìµœëŒ€ íˆíŠ¸ ìˆ˜
+    //ë°ë¯¸ì§€
+    //ì—ë‹ˆë©”ì´ì…˜
+    //ì´í™íŠ¸
+    //ìŠ¤í‚¬ì‚¬ìš©í›„ ìœ„ì¹˜
+    //ì •ë³´
     public enum AtkKind { none = 0, acttive, atkTrigger, nonTarget, warfAtk, buffMe, killEnemy, isBuffState, getHeal, moveDetect, noMoveDetect, monsterIsHit, dmgUp, isBuffOff,isLevelUp,isDamaged,isCounter, isGetKey, isBoxOpen, isChangedItem, everyTurn, isAddtionalTurn,isGameStart,isBuffStart, isNormalAtk,isOverHp };
     
     public string skillName;
@@ -62,7 +62,7 @@ public class Skill : ScriptableObject
                         break;
                     case "dotDmg":
                         sTemp += "<color=#" + ColorUtility.ToHtmlStringRGB(GameManager.Instans.StateColor[p.mainState]) + ">"
-                            + (p.GetPlayerDmg(n) / 3) + "(" + getTimerCode[0] + "ÅÏ)" + "</color>";
+                            + (p.GetPlayerDmg(n) / 3) + "(" + getTimerCode[0] + "í„´)" + "</color>";
                         break;
                     case "buff":
                         sTemp += getTimerCode[0].ToString();
@@ -73,7 +73,7 @@ public class Skill : ScriptableObject
                 }
             }
         }
-        else
+        else 
         {
             for (int i = 0; i < dataArr.Length; ++i)
             {
@@ -85,7 +85,7 @@ public class Skill : ScriptableObject
                         break;
                     case "dotDmg":
                         sTemp += "<color=#" + ColorUtility.ToHtmlStringRGB(GameManager.Instans.StateColor[GameManager.Instans.selChar.mainState]) + ">"
-                            + Mathf.Max(1, (int)(baseDmg[0] / 3)) + "+" + Mathf.Max(1.0f, dmg[0] / 3).ToString("N1") + "*D" + "(" + getTimerCode[0].x + "ÅÏ)" + "</color>";
+                            + Mathf.Max(1, (int)(baseDmg[0] / 3)) + "+" + Mathf.Max(1.0f, dmg[0] / 3).ToString("N1") + "*D" + "(" + getTimerCode[0].x + "í„´)" + "</color>";
                         break;
                     case "buff":
                         sTemp += getTimerCode[0].x.ToString();
@@ -121,7 +121,7 @@ public class Skill : ScriptableObject
         public Vector3Int ts;
         public Monster m;
         public Transform tTemp;
-        public int num; // ½ºÅ³ ÀÌº¥Æ® ¹øÈ£
+        public int num; // ìŠ¤í‚¬ ì´ë²¤íŠ¸ ë²ˆí˜¸
         public TriggerData(Vector3Int xyz, Monster ms = null, Transform t = null, int number = 0)
         {
             ts = xyz;
@@ -143,7 +143,7 @@ public class Skill : ScriptableObject
         TriggerData td = (TriggerData)m;
         MapManager.Instans.player.keyGetPercentage +=getTimerCode[td.num].x;
     }
-    #region °ø°İÆ®¸®°Å
+    #region ê³µê²©íŠ¸ë¦¬ê±°
     public void executionLessLifeEnemy(object m)
     {
         TriggerData td = (TriggerData)m;
@@ -326,7 +326,7 @@ public class Skill : ScriptableObject
         int intState = p.getState(2);
         switch (val)
         {
-            case 1: // ÈûÀÌ°¡Àå ³ôÀ»°æ¿ì : ºÒÀåÆÇ »ı¼º
+            case 1: // í˜ì´ê°€ì¥ ë†’ì„ê²½ìš° : ë¶ˆì¥íŒ ìƒì„±
                 d = Mathf.Max(1, d / 3);
                 
                 for (int i = -1; i < 2; ++i)
@@ -342,7 +342,7 @@ public class Skill : ScriptableObject
                 }
 
                 break;
-            case 2: // ¹ÎÃ¸ÀÌ °¡Àå ³ôÀ»°æ¿ì : Áï½Ã ÆøÆÈ»ı¼º
+            case 2: // ë¯¼ì²©ì´ ê°€ì¥ ë†’ì„ê²½ìš° : ì¦‰ì‹œ í­íŒ”ìƒì„±
                 Vector2Int point = new Vector2Int(td.ts.x, td.ts.y);
                 if (Mapm.getTileData(point.x, point.y) != MapManager.TileCheck.Block)
                 {
@@ -373,11 +373,11 @@ public class Skill : ScriptableObject
                 }
                 Mapm.shildCheck();
                 break;
-            case 3: // Áö´ÉÀÌ °¡Àå³ôÀ»°æ¿ì : 3¹øÆ¨±â´Â ¿¬¼â¹ø°³ 3°³ »ı¼º
+            case 3: // ì§€ëŠ¥ì´ ê°€ì¥ë†’ì„ê²½ìš° : 3ë²ˆíŠ•ê¸°ëŠ” ì—°ì‡„ë²ˆê°œ 3ê°œ ìƒì„±
                 atk(m);
                 ChainLightning(m);
-                //td.ts.x *= 5;   // µ¥¹ÌÁö
-                //td.ts.y = 30;    // Æ¨±â´Â È½¼ö
+                //td.ts.x *= 5;   // ë°ë¯¸ì§€
+                //td.ts.y = 30;    // íŠ•ê¸°ëŠ” íšŸìˆ˜
                 //MapManager.Instans.player.StartCoroutine("makeChainLight", td);
                 break;
             default:
@@ -410,8 +410,8 @@ public class Skill : ScriptableObject
                             Monster monster = tTemp.GetChild(0).GetComponent<Monster>();
                             td.m = monster;
 
-                            td.ts.x = d;   // µ¥¹ÌÁö
-                            td.ts.y = hit + Mapm.skillLev[td.ts.z] / 2; // Æ¨±â´Â È½¼ö
+                            td.ts.x = d;   // ë°ë¯¸ì§€
+                            td.ts.y = hit + Mapm.skillLev[td.ts.z] / 2; // íŠ•ê¸°ëŠ” íšŸìˆ˜
                             MapManager.Instans.player.StartCoroutine("makeChainLight", td);
                             break;
                         }
@@ -597,17 +597,17 @@ public class Skill : ScriptableObject
     }
     #endregion
 
-    #region ÄğÅ¸ÀÓÆ®¸®°Å
-    public void Skill_CoolTime_Reduce(object m) //getTimerCode x ¹øÂ° ½ºÅ³À» getTimerCode y¸¸Å­ ÄğÅ¸ÀÓ °¨¼Ò
-    {                                           //getTimerCode.y==-1ÀÌ¸é ÀüºÎ°¨¼Ò
+    #region ì¿¨íƒ€ì„íŠ¸ë¦¬ê±°
+    public void Skill_CoolTime_Reduce(object m) //getTimerCode x ë²ˆì§¸ ìŠ¤í‚¬ì„ getTimerCode yë§Œí¼ ì¿¨íƒ€ì„ ê°ì†Œ
+    {                                           //getTimerCode.y==-1ì´ë©´ ì „ë¶€ê°ì†Œ
         TriggerData td = (TriggerData)m;
         Player p = MapManager.Instans.player;
         if (p.Mapm.CoolTime[getTimerCode[td.num].x] <= 0) return;
         p.Mapm.CoolTime[getTimerCode[td.num].x] -= (getTimerCode[td.num].y == -1 && p.Mapm.CoolTime[getTimerCode[td.num].x] >= 0) ? coolTime : getTimerCode[td.num].y;
         p.Mapm.coolTimeShowMethod();
     }
-    public void Skill_CoolTimeReduceAsCode(object m)//codeÀÇ ½ºÅ³À» getTimerCode y¸¸Å­ ÄğÅ¸ÀÓ °¨¼Ò
-    {                                           //getTimerCode.y==-1ÀÌ¸é ÀüºÎ°¨¼Ò
+    public void Skill_CoolTimeReduceAsCode(object m)//codeì˜ ìŠ¤í‚¬ì„ getTimerCode yë§Œí¼ ì¿¨íƒ€ì„ ê°ì†Œ
+    {                                           //getTimerCode.y==-1ì´ë©´ ì „ë¶€ê°ì†Œ
         TriggerData td = (TriggerData)m;
         Player p = MapManager.Instans.player;
         for (int i=0; i < p.mySkillSet.Length; ++i)
@@ -623,10 +623,10 @@ public class Skill : ScriptableObject
     }
     #endregion
 
-    #region ÆøÆÈ
+    #region í­íŒ”
     public void CrossBomb3x3(object m)
     {
-        //ts.x,y = Å¸°¹À§Ä¡, tTemp ÀÌÆÑÆ®
+        //ts.x,y = íƒ€ê°¯ìœ„ì¹˜, tTemp ì´íŒ©íŠ¸
         TriggerData td = (TriggerData)m;
 
         MapManager Mapm = MapManager.Instans;
@@ -675,7 +675,7 @@ public class Skill : ScriptableObject
     }
     #endregion
 
-    #region ÀåÆÇ³²±â±â
+    #region ì¥íŒë‚¨ê¸°ê¸°
     public void makeBullJangPan3Time(object m)
     {
         TriggerData td = (TriggerData)m;
@@ -689,7 +689,7 @@ public class Skill : ScriptableObject
 
     #endregion
 
-    #region ÀÌµ¿±â
+    #region ì´ë™ê¸°
     public void warfAtk3x3(object m)
     {
         TriggerData td = (TriggerData)m;
@@ -751,7 +751,7 @@ public class Skill : ScriptableObject
         }
         Mapm.shildCheck();
     }
-    public void removeAllBuff(object m) //¸ğµç ¹öÇÁ Á¦°Å
+    public void removeAllBuff(object m) //ëª¨ë“  ë²„í”„ ì œê±°
     {
         MapManager Mapm = MapManager.Instans;
         for (int i = 0; i < Mapm.buffList.Count; ++i)
@@ -804,7 +804,7 @@ public class Skill : ScriptableObject
             }
         }
     }
-    public void movePos(object m) //nonTargetArrow·Î tcTrigger¿¡ ÇØ´çÇÏ´Â Å¸ÀÏ¸¦ °¨ÁöÇÏ¸é ±× À§Ä¡·Î ÇÃ·¹ÀÌ¾î¸¦ ÀÌµ¿ÇÏ±â À§ÇÔ
+    public void movePos(object m) //nonTargetArrowë¡œ tcTriggerì— í•´ë‹¹í•˜ëŠ” íƒ€ì¼ë¥¼ ê°ì§€í•˜ë©´ ê·¸ ìœ„ì¹˜ë¡œ í”Œë ˆì´ì–´ë¥¼ ì´ë™í•˜ê¸° ìœ„í•¨
     {
         TriggerData td = (TriggerData)m;
         MapManager Mapm = MapManager.Instans;
@@ -948,9 +948,9 @@ public class Skill : ScriptableObject
             Mapm.shildCheck();
         }
     }
-    public void RetreatBack(object m) // Ä³¸¯ÅÍ ÀÌµ¿ ÇÔ¼ö
+    public void RetreatBack(object m) // ìºë¦­í„° ì´ë™ í•¨ìˆ˜
     {
-        // getTimerCode[0].x ÀÇ ¸¶ÀÌ³Ê½º ¼öÄ¡¸¸Å­ µÚ·Î ÈÄÅğÇÑ´Ù
+        // getTimerCode[0].x ì˜ ë§ˆì´ë„ˆìŠ¤ ìˆ˜ì¹˜ë§Œí¼ ë’¤ë¡œ í›„í‡´í•œë‹¤
         TriggerData td = (TriggerData)m;
         MapManager Mapm = MapManager.Instans;
         MonsterManager Monm = MonsterManager.instance;
@@ -1000,7 +1000,7 @@ public class Skill : ScriptableObject
     }
     #endregion
 
-    #region ¹öÇÁ½ºÅ³
+    #region ë²„í”„ìŠ¤í‚¬
     public void addMainStateProp(object m)
     {
         TriggerData td = (TriggerData)m;
@@ -1016,10 +1016,10 @@ public class Skill : ScriptableObject
         catch (System.IndexOutOfRangeException) { }
         status[getTimerCode[td.num].y] = getTimerCode[td.num].z + addDmg;
         // getTimerCode 
-        // x : Áö¼Ó½Ã°£, x°¡ - °ªÀÌ¸é ½×À»¼ö ÀÖ´Â ¹öÇÁ, + °ªÀÌ¸é °»½Å ÇüÅÂÀÇ ¹öÇÁ
+        // x : ì§€ì†ì‹œê°„, xê°€ - ê°’ì´ë©´ ìŒ“ì„ìˆ˜ ìˆëŠ” ë²„í”„, + ê°’ì´ë©´ ê°±ì‹  í˜•íƒœì˜ ë²„í”„
         // y
-        // 0 : Èû , 1 : ¹ÎÃ¸, 2 : Áö´É
-        // 3 : °ø , 4 : ¹æ¾î, 5 : Ã¼·Â
+        // 0 : í˜ , 1 : ë¯¼ì²©, 2 : ì§€ëŠ¥
+        // 3 : ê³µ , 4 : ë°©ì–´, 5 : ì²´ë ¥
         /*for (int j = 0; j < Mapm.buffList.Count; ++j)
         {
             if (Mapm.buffList[j].Bfcode == code)
@@ -1057,7 +1057,7 @@ public class Skill : ScriptableObject
     {
         TriggerData td = (TriggerData)m;
         MapManager Mapm = MapManager.Instans;
-        Player p = Mapm.player;   //getTimerCode x = Áö¼Ó½Ã°£ y = ½ºÅ³¹øÈ£ z = Áõ°¡ ¼öÄ¡ %
+        Player p = Mapm.player;   //getTimerCode x = ì§€ì†ì‹œê°„ y = ìŠ¤í‚¬ë²ˆí˜¸ z = ì¦ê°€ ìˆ˜ì¹˜ %
         float dmgUpNum = getTimerCode[td.num].z / 100f;
         for (int j = 0; j < Mapm.buffList.Count; ++j)
         {
@@ -1084,7 +1084,7 @@ public class Skill : ScriptableObject
     }
     public void buffProportionHeal(object m)
     {
-        // getTimerCode 0 ¹ø ±âÃÊ Èú ¼öÄ¡
+        // getTimerCode 0 ë²ˆ ê¸°ì´ˆ í ìˆ˜ì¹˜
         TriggerData td = (TriggerData)m;
         MapManager Mapm = MapManager.Instans;
         Player p = Mapm.player;
@@ -1126,7 +1126,7 @@ public class Skill : ScriptableObject
                 Mapm.buffList[i].myUI.parent = Mapm.buffSetInvPenal;
                 for (int j = 0; j < 3; ++j)
                 {
-                    // ¹öÇÁ ²¨Áø°Í Å½»ö¿ë
+                    // ë²„í”„ êº¼ì§„ê²ƒ íƒìƒ‰ìš©
                     p.myAddState[j] -= Mapm.buffList[i].addState[j];
                 }
                 for (int j = 0; j < 4; ++j)
@@ -1194,7 +1194,7 @@ public class Skill : ScriptableObject
             }
         }
     }
-    public void HealAndDmgUpIfOverHeal(object m)   // ÃÊ°úÈ¸º¹½Ã µ¥¹ÌÁö ¾÷
+    public void HealAndDmgUpIfOverHeal(object m)   // ì´ˆê³¼íšŒë³µì‹œ ë°ë¯¸ì§€ ì—…
     {
         TriggerData td = (TriggerData)m;
         MapManager Mapm = MapManager.Instans;
@@ -1209,8 +1209,8 @@ public class Skill : ScriptableObject
         p.life = p.checkMyMaxHp();
         Mapm.getBuff(0, 0, 0, getTimerCode[td.num].x, skillIcon, code, getTimerCode[td.num].y, 0, 0);
     }
-    public void PercentHeal(object m)   // ÀÏÁ¤ ÆÛ¼¾Æ® ¸¸Å­ È¸º¹ÇÑ´Ù
-    {   // getTimerCode[td.num].x ÆÛ¼¾Æ® ¸¸Å­ È¸º¹ÇÑ´Ù
+    public void PercentHeal(object m)   // ì¼ì • í¼ì„¼íŠ¸ ë§Œí¼ íšŒë³µí•œë‹¤
+    {   // getTimerCode[td.num].x í¼ì„¼íŠ¸ ë§Œí¼ íšŒë³µí•œë‹¤
         TriggerData td = (TriggerData)m;
         MapManager Mapm = MapManager.Instans;
         Player p = Mapm.player;
@@ -1225,19 +1225,19 @@ public class Skill : ScriptableObject
             PercentHeal(m);
         }
     }
-    public void BuffDeftoDmg(object m)  //  ¹æ¾î·Â¸¸Å­ °ø°İ·Â Áõ°¡ ¹öÇÁ
-    {   // getTimerCode[td.num].x ÀÇ Áö¼Ó½Ã°£µ¿¾È ¹öÇÁ°¡ À¯ÁöµÈ´Ù
+    public void BuffDeftoDmg(object m)  //  ë°©ì–´ë ¥ë§Œí¼ ê³µê²©ë ¥ ì¦ê°€ ë²„í”„
+    {   // getTimerCode[td.num].x ì˜ ì§€ì†ì‹œê°„ë™ì•ˆ ë²„í”„ê°€ ìœ ì§€ëœë‹¤
         TriggerData td = (TriggerData)m;
         MapManager Mapm = MapManager.Instans;
         Player p = Mapm.player;
         Mapm.getBuff(0, 0, 0, getTimerCode[td.num].x, skillIcon, code, p.getMyDefence(), 0, 0);
     }
-    public void BuffStateToDmg(object m)    // ÇØ´ç ¼öÄ¡¸¸Å­ °ø°İ·Â Áõ°¡ ¹öÇÁ
+    public void BuffStateToDmg(object m)    // í•´ë‹¹ ìˆ˜ì¹˜ë§Œí¼ ê³µê²©ë ¥ ì¦ê°€ ë²„í”„
     {
-        // getTimerCode[td.num].x ÀÇ Áö¼Ó½Ã°£µ¿¾È ¹öÇÁ°¡ À¯ÁöµÈ´Ù
-        // getTimerCode[td.num].yÀÇ ¼öÄ¡¸¸Å­ °ø°İ·ÂÀÌ Áõ°¡
-        // 0 : Èû , 1 : ¹ÎÃ¸, 2 : Áö´É
-        // 3 : °ø , 4 : ¹æ¾î, 5 : Ã¼·Â
+        // getTimerCode[td.num].x ì˜ ì§€ì†ì‹œê°„ë™ì•ˆ ë²„í”„ê°€ ìœ ì§€ëœë‹¤
+        // getTimerCode[td.num].yì˜ ìˆ˜ì¹˜ë§Œí¼ ê³µê²©ë ¥ì´ ì¦ê°€
+        // 0 : í˜ , 1 : ë¯¼ì²©, 2 : ì§€ëŠ¥
+        // 3 : ê³µ , 4 : ë°©ì–´, 5 : ì²´ë ¥
         TriggerData td = (TriggerData)m;
         MapManager Mapm = MapManager.Instans;
         Player p = Mapm.player;
@@ -1251,11 +1251,11 @@ public class Skill : ScriptableObject
         }
         switch (getTimerCode[td.num].y)
         {
-            case 4: // ¹æ¾î·Â¸¸Å­ °ø°İ·Â »ó½Â
+            case 4: // ë°©ì–´ë ¥ë§Œí¼ ê³µê²©ë ¥ ìƒìŠ¹
                 Mapm.getBuff(0, 0, 0, getTimerCode[td.num].x, skillIcon, code, p.getMyDefence(), 0, 0);
                 break;
             case 5:
-                float ml = 0f;  // ¾ÆÀÌÅÛ¼öÄ¡ Ã¼·Â ÇÕ + Èûx2 ¸¸Å­ °ø°İ·Â »ó½Â
+                float ml = 0f;  // ì•„ì´í…œìˆ˜ì¹˜ ì²´ë ¥ í•© + í˜x2 ë§Œí¼ ê³µê²©ë ¥ ìƒìŠ¹
                 for (int i = 0; i < 6; ++i)
                 {
                     int lev = p.myItems[i].lev;
@@ -1266,8 +1266,8 @@ public class Skill : ScriptableObject
                 break;
         }
     }
-    public void HealofDmgPercentIfBuff(object m)  // ÇÇÈí¹öÇÁÀÖÀ»¶§ ÇÇÈí ½ÃÀü
-    {   //getTimerCode[td.num].x : ¸îÆÛ¼¾Æ® È¸º¹½ÃÅ³°ÇÁö °áÁ¤
+    public void HealofDmgPercentIfBuff(object m)  // í”¼í¡ë²„í”„ìˆì„ë•Œ í”¼í¡ ì‹œì „
+    {   //getTimerCode[td.num].x : ëª‡í¼ì„¼íŠ¸ íšŒë³µì‹œí‚¬ê±´ì§€ ê²°ì •
         TriggerData td = (TriggerData)m;
         MapManager Mapm = MapManager.Instans;
         Player p = Mapm.player;
@@ -1280,8 +1280,8 @@ public class Skill : ScriptableObject
             }
         }
     }
-    public void HealofDmg(object m) // ÇÇÇØ·®ÀÇ ÀÏºÎ¸¦ Ã¼·ÂÀ¸·Î ÀüÈ¯
-    {   //getTimerCode[td.num].x : ¸îÆÛ¼¾Æ® È¸º¹½ÃÅ³°ÇÁö °áÁ¤
+    public void HealofDmg(object m) // í”¼í•´ëŸ‰ì˜ ì¼ë¶€ë¥¼ ì²´ë ¥ìœ¼ë¡œ ì „í™˜
+    {   //getTimerCode[td.num].x : ëª‡í¼ì„¼íŠ¸ íšŒë³µì‹œí‚¬ê±´ì§€ ê²°ì •
         TriggerData td = (TriggerData)m;
         MapManager Mapm = MapManager.Instans;
         Player p = Mapm.player;
@@ -1294,7 +1294,7 @@ public class Skill : ScriptableObject
             }
         }
     }
-    public void ChainLightningIfBuff(object m)  // ¹öÇÁ ÀÖÀ»¶§ Ã¼ÀÎ¶óÀÌÆ®´× ½ÃÀü
+    public void ChainLightningIfBuff(object m)  // ë²„í”„ ìˆì„ë•Œ ì²´ì¸ë¼ì´íŠ¸ë‹ ì‹œì „
     {
         TriggerData td = (TriggerData)m;
         MapManager Mapm = MapManager.Instans;
@@ -1318,8 +1318,8 @@ public class Skill : ScriptableObject
                     }
                 }
                 //ChainLightning(td);
-                td.ts.x = Mathf.Max(1, d / 3);   // µ¥¹ÌÁö
-                td.ts.y = 2;    // Æ¨±â´Â È½¼ö
+                td.ts.x = Mathf.Max(1, d / 3);   // ë°ë¯¸ì§€
+                td.ts.y = 2;    // íŠ•ê¸°ëŠ” íšŸìˆ˜
                 MapManager.Instans.player.StartCoroutine("makeChainLight", td);
 
             }
@@ -1385,15 +1385,15 @@ public class Skill : ScriptableObject
             Mapm.shildCheck();
         }
     }
-    public void BombIfOverKill(object m)    // ÇÇÇØ·® ÃÊ°ú½Ã Æø¹ß
+    public void BombIfOverKill(object m)    // í”¼í•´ëŸ‰ ì´ˆê³¼ì‹œ í­ë°œ
     {
         TriggerData td = (TriggerData)m;
         MapManager Mapm = MapManager.Instans;
 
         Player p = Mapm.player;
         int d = p.GetPlayerDmg(td.ts.z);
-        if (td.m.hp > d) return;    // ÇÇÇØ·® ÃÊ°ú Ã¼Å©
-        d = d - td.m.hp;    // ÃÊ°ú·®
+        if (td.m.hp > d) return;    // í”¼í•´ëŸ‰ ì´ˆê³¼ ì²´í¬
+        d = d - td.m.hp;    // ì´ˆê³¼ëŸ‰
         try { 
         GameObject gTemp = Instantiate(bombEffect, Mapm.cMap[td.ts.x, td.ts.y].tileTransform);
         gTemp.transform.localPosition = Vector3.up * 0.9f + Vector3.back * 10;
@@ -1436,7 +1436,7 @@ public class Skill : ScriptableObject
         }
         Mapm.shildCheck();
     }
-    public void BuffByHightestState(object m)   // °¡Àå³ôÀº ½ºÅÈ¿¡ µû¶ó ¹öÇÁ ºÎ¿©
+    public void BuffByHightestState(object m)   // ê°€ì¥ë†’ì€ ìŠ¤íƒ¯ì— ë”°ë¼ ë²„í”„ ë¶€ì—¬
     {
         TriggerData td = (TriggerData)m;
         MapManager Mapm = MapManager.Instans;
@@ -1448,8 +1448,8 @@ public class Skill : ScriptableObject
             if (p.getState(1) < p.getState(2)) val = 3;
         }
         else if (p.getState(0) < p.getState(2)) val = 3;
-        // getTimerCode[td.num].x : Áö¼Ó½Ã°£
-        // getTimerCode[td.num].z : ¿Ã¸± ±âº»¼öÄ¡
+        // getTimerCode[td.num].x : ì§€ì†ì‹œê°„
+        // getTimerCode[td.num].z : ì˜¬ë¦´ ê¸°ë³¸ìˆ˜ì¹˜
         for (int j = 0; j < Mapm.buffList.Count; ++j)
         {
             if (Mapm.buffList[j].Bfcode == code)
@@ -1476,10 +1476,10 @@ public class Skill : ScriptableObject
                 break;
         }
     }
-    public void GetKey(object m)    // º£ÀÌ½º µ¥¹ÌÁö È®·ü·Î ¿­¼è¸¦ È¹µæÇÑ´Ù
+    public void GetKey(object m)    // ë² ì´ìŠ¤ ë°ë¯¸ì§€ í™•ë¥ ë¡œ ì—´ì‡ ë¥¼ íšë“í•œë‹¤
     {
-        // getTimerCode[td.num].x : ½ÃÇà È½¼ö
-        // getTimerCode[td.num].y : ¼º°ø½Ã ¾ò´Â °¹¼ö
+        // getTimerCode[td.num].x : ì‹œí–‰ íšŸìˆ˜
+        // getTimerCode[td.num].y : ì„±ê³µì‹œ ì–»ëŠ” ê°¯ìˆ˜
         TriggerData td = (TriggerData)m;
         MapManager Mapm = MapManager.Instans;
         Player p = Mapm.player;
