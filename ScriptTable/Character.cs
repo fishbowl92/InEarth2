@@ -13,7 +13,7 @@ public class Character : ScriptableObject
     public Skill[] skillSetting;
     public GameObject ImgSet;
 
-
+ 
     public AnimatorOverrideController anim;
     public TraitDatas[] myTraitData;
     public int[] myTraitSelectData;
