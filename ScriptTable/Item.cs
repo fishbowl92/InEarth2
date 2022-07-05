@@ -9,43 +9,43 @@ using TMPro;
 [CreateAssetMenu(fileName = "ItemName", menuName = "Scriptable Object Asset/ItemData")]
 public class Item : ScriptableObject
 {
-    public kind[] myTrigger;
-    public UnityEvent<TriggerData>[] itemEvent;
-    public int[] code;
-    public float[] eventGab;
-    public Sprite Img;
-    public float dmg;
-    public float def;
-    public float hp;
-    public int[] getState = new int[3];
+    public kind[] myTrigger;    // 아이템 발동 트리거
+    public UnityEvent<TriggerData>[] itemEvent; // 아이템 트리거 발동시 실행되는 이벤트
+    public int[] code;  // 아이템 코드
+    public float[] eventGab;    // 발생 이벤트 수치
+    public Sprite Img;  // 아이템 이미지
+    public float dmg;   // 아이템 베이스 데미지
+    public float def;   // 아이템 베이스 방어력
+    public float hp;    // 아이템 베이스 체력
+    public int[] getState = new int[3]; // 아이템이 올려주는 힘, 민첩, 지능
     [TextArea(10, 20)]
-    public string infoText;
+    public string infoText; // 아이템 설명 텍스트
     public int getCount;
-    public int tear;
-    public int getItemDmg(int lev)
+    public int tear;        // 아이템 희귀도
+    public int getItemDmg(int lev)  // 해당 아이템 사용시 데미지 계산에 사용될 아이템 데미지 수치
     {
         return (int)(dmg * (1 + lev * 0.3f));
     }
-    public int getItemDef(int lev)
+    public int getItemDef(int lev)  // 해당 아이템 사용시 방어력 계산에 사용될 아이템 방어력 수치
     {
         return (int)(def * (1 + lev * 0.3f));
     }
-    public int getItemHp(int lev)
+    public int getItemHp(int lev)   // 해당 아이템 사용시 체력 계산에 사용될 아이템 체력 수치
     {
         return (int)(hp * (1 + lev * 0.6f));
     }
-    public void skillDmgUp(TriggerData td)
+    public void skillDmgUp(TriggerData td)  // 스킬 데미지 증가
     {
         MapManager.Instans.player.dmgUp[code[td.ts.y]] += eventGab[code[td.ts.y]];
     }
-    public void getKey(TriggerData td)
+    public void getKey(TriggerData td)  // 열쇠 획득
     {
         MapManager Mapm = MapManager.Instans;
         Mapm.keyCount += (int)eventGab[code[td.ts.y]];
         if (Mapm.keyCount < 0) Mapm.keyCount = 0;
         Mapm.keyCountText.text = (Mapm.keyCount).ToString();
     }
-    public void ItemlevDown(TriggerData td)
+    public void ItemlevDown(TriggerData td) // 아이템 파괴 or 이벤트로 인한 아이템 레벨 수치 조정시 사용
     {
         Player.ItemData id = MapManager.Instans.player.myItems[td.ts.z];
         int gab = (int)eventGab[code[td.ts.y]];
@@ -60,11 +60,11 @@ public class Item : ScriptableObject
         }
         MapManager.Instans.checkItemKanUI();
     }
-    public void FixHealItem(TriggerData td)
+    public void FixHealItem(TriggerData td) // 플레이어 치유 수치에 영향
     {
         MapManager.Instans.player.PlayerGetHeal((int)eventGab[code[td.ts.y]], true);
     }
-    public void LoseShieldAndHealAsItemLev(TriggerData td)
+    public void LoseShieldAndHealAsItemLev(TriggerData td)  // 쉴드를 잃고 아이템 레벨 비례 회복
     {
         MapManager Mapm = MapManager.Instans;
         Player p = Mapm.player;
@@ -75,30 +75,30 @@ public class Item : ScriptableObject
         p.shild -= 1;
         HealAsItemLev(td);
     }
-    public void HealAsItemLev(TriggerData td)
+    public void HealAsItemLev(TriggerData td)   // 아이템 레벨 비례 회복
     {
         MapManager Mapm = MapManager.Instans;
         Player p = Mapm.player;
         p.PlayerGetHeal((int)p.myItems[td.ts.z].lev, true);
     }
-    public void ChainLighting(TriggerData td)
+    public void ChainLighting(TriggerData td)   // 연쇄 공격 이벤트 발생
     {
         td.ts.x *= 5;
         td.ts.y = (int)eventGab[code[td.ts.y]];
         MapManager.Instans.player.StartCoroutine("makeChainLight", td);
     }
-    public void getExp(TriggerData td) //����ġ ȹ��
+    public void getExp(TriggerData td) //경험치 획득
     {
         MapManager.Instans.player.exp += (int)eventGab[code[td.ts.y]];
     }
-    public void getShield(TriggerData td) //���� ȹ��
+    public void getShield(TriggerData td) //쉴드 획득
     {
         MapManager Mapm = MapManager.Instans;
         Player p = Mapm.player;
         p.shild += (int)eventGab[code[td.ts.y]];
         Mapm.shildCheck();
     }
-    public void removeThisItem(TriggerData td) //������ �ı�
+    public void removeThisItem(TriggerData td) //아이템 파괴
     {
         MapManager Mapm = MapManager.Instans;
         Player.ItemData id = MapManager.Instans.player.myItems[td.ts.z];
@@ -107,7 +107,7 @@ public class Item : ScriptableObject
         //player.myItems[selectItem].item = GM.noneItem;
         Mapm.checkItemKanUI();
     }
-    public void MoveRandomLocation(TriggerData td) //������� �̵�
+    public void MoveRandomLocation(TriggerData td) //랜덤장소 이동
     {
         MapManager Mapm = MapManager.Instans;
         MonsterManager Monm = MonsterManager.instance;
@@ -128,7 +128,7 @@ public class Item : ScriptableObject
         p.end = p.transform.position;
     }
 
-    public void Bomb(TriggerData td)    // �÷��̾� �ֺ� ����
+    public void Bomb(TriggerData td)    // 플레이어 주변 폭발
     {
         MapManager Mapm = MapManager.Instans;
         Player p = Mapm.player;
@@ -180,13 +180,13 @@ public class Item : ScriptableObject
         }
         Mapm.shildCheck();
     }
-    public void DmgUpOneTurn(TriggerData td) //1 �� ������ ����
+    public void DmgUpOneTurn(TriggerData td) //1 턴 데미지 증가
     {
         MapManager Mapm = MapManager.Instans;
         Player p = Mapm.player;
         Mapm.getBuff(0, 0, 0, 1, Img, "", (int)p.myItems[td.ts.z].lev, 0, 0);
     }
-    public void temJangPan(TriggerData td)
+    public void temJangPan(TriggerData td)  // 아이템으로 인한 불데미지 장판 소환
     {
         MapManager Mapm = MapManager.Instans;
         Player p = Mapm.player;
@@ -195,7 +195,7 @@ public class Item : ScriptableObject
         effect.gameObject.SetActive(true);
         p.dotDmg.Add(new Player.JangPanData(td.ts.z, Mapm.playerMove, (int)p.myItems[td.ts.z].lev, 3, effect));
     }
-    public void playerDmged(TriggerData td)
+    public void playerDmged(TriggerData td) // 플레이어 피해량 영향
     {
         MapManager Mapm = MapManager.Instans;
         Player p = Mapm.player;
@@ -209,7 +209,7 @@ public class Item : ScriptableObject
     temp.position.z);
         temp.gameObject.SetActive(true);
     }
-    public void playerDmgedPercent(TriggerData td)
+    public void playerDmgedPercent(TriggerData td)  // 플레이어 최대체력 피해량에 영향
     {
         MapManager Mapm = MapManager.Instans;
         Player p = Mapm.player;
@@ -224,7 +224,7 @@ public class Item : ScriptableObject
     temp.position.z);
         temp.gameObject.SetActive(true);
     }
-    public void buffExtension(TriggerData td)
+    public void buffExtension(TriggerData td)   // 버프 시간 지속 or 갱신
     {
         MapManager Mapm = MapManager.Instans;
         for (int i = 0; i < Mapm.buffList.Count; ++i)
@@ -235,8 +235,8 @@ public class Item : ScriptableObject
                 Mapm.buffList[i].myUI.GetChild(1).GetComponent<TextMeshProUGUI>().text = Mapm.buffList[i].count.ToString();
             }
         }
-    }   // ������ ���� �ð� ����
-    public void playerDmgedAsLv(TriggerData td)
+    }   // 아이템 버프 시간 연장
+    public void playerDmgedAsLv(TriggerData td) // 아이템 레벨에 비례하여 플레이어 피해
     {
         MapManager Mapm = MapManager.Instans;
         Player p = Mapm.player;
@@ -245,7 +245,7 @@ public class Item : ScriptableObject
         Mapm.lifeText.text = p.life + "/" + p.checkMyMaxHp();
         Transform temp = Mapm.showDmg((int)eventGab[code[td.ts.y]], 1);
     }
-    public void addAtkBuff(TriggerData td)
+    public void addAtkBuff(TriggerData td)  // 공격력 버프
     {
         MapManager Mapm = MapManager.Instans;
         Player p = Mapm.player;
@@ -260,12 +260,12 @@ public class Item : ScriptableObject
         }
         Mapm.getBuff(0, 0, 0, code[td.ts.y], Img, codeS, (int)eventGab[td.ts.y], 0, 0);
     }
-    public void OverHpAtkDmgToHeal(TriggerData td)
+    public void OverHpAtkDmgToHeal(TriggerData td)  // 적 최대체력 초과 공격시 회복
     {
         Player p = MapManager.Instans.player;
         p.PlayerGetHeal(td.num / 10, true);
     }
-    public void addDefBuff(TriggerData td)
+    public void addDefBuff(TriggerData td)  // 방어력 버프
     {
         MapManager Mapm = MapManager.Instans;
         Player p = Mapm.player;
@@ -280,7 +280,7 @@ public class Item : ScriptableObject
         }
         Mapm.getBuff(0, 0, 0, code[td.ts.y], Img, codeS, 0, (int)eventGab[td.ts.y], 0);
     }
-    public void HpAddValUp(TriggerData td) //�������� ü�� ��·� ����
+    public void HpAddValUp(TriggerData td) //레벨업시 체력 상승량 증가
     {
         Player p = MapManager.Instans.player;
         p.TaritSpecState[1] += (int)eventGab[td.ts.y];
