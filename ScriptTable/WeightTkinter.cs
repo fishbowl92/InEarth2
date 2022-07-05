@@ -12,7 +12,7 @@ public class WeightTkinter : ScriptableObject
     {
         public double[] myWeight;
     }
-    public weightSet[] kwDNA = new weightSet[5];  // 사망 가중치
+    public weightSet[] kwDNA = new weightSet[5];    // 사망 가중치
     public weightSet[] fwDNA = new weightSet[4];    // 공격 가중치
     public weightSet[] fwDNA2 = new weightSet[9];   // 이동 가중치
     [ContextMenu("getRandValue")]
