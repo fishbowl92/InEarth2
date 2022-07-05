@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-// ¸Ê ±¸¼º¿ä¼Ò / ¸ÊÀ» Á¤ÀÇÇÏ±âÀ§ÇÑ ScriptableObject
 [CreateAssetMenu(fileName = "Character", menuName = "Scriptable Object Asset/Character Data")]
 public class Character : ScriptableObject
 {
@@ -38,7 +37,7 @@ public class Character : ScriptableObject
     }
 
     public int expPoint;
-    // ¸ó½ºÅÍ Á¤º¸
+    // ëª¬ìŠ¤í„° ì •ë³´
     //[System.Serializable]
     public void ChangeImgeSet(Transform target)
     {
@@ -70,7 +69,7 @@ public class Character : ScriptableObject
     }
     public Vector3Int getCharLevAndExp()
     {
-        //x·¹º§, y°æÇèÄ¡, z¿ä±¸°æÇèÄ¡
+        //xë ˆë²¨, yê²½í—˜ì¹˜, zìš”êµ¬ê²½í—˜ì¹˜
         int gab = expPoint;
         Vector3Int vTemp = Vector3Int.zero; 
         vTemp.x++;
