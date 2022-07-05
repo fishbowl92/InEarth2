@@ -41,4 +41,4 @@ public class Trait : ScriptableObject
     {
         p.Mapm.playerGetRandomItem(0, 30);
     }
-}
+} 
