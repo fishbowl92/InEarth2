@@ -19,17 +19,17 @@ public class MapManager : MonoBehaviour
         textShowTime = Time.time + 1;
         CenterText.gameObject.SetActive(true);
     }
-    //0 ³ª¸¸ 2 Ãß°¡±âÈ¸ 4 Àû°úÇÔ²²
+    //0 ë‚˜ë§Œ 2 ì¶”ê°€ê¸°íšŒ 4 ì ê³¼í•¨ê»˜
     public int TURN;
     public Image TURNcolor;
     public Color[] colorSet;
     public Transform cameraPoint;
 
-    //0. ·¹º§¾÷
+    //0. ë ˆë²¨ì—…
     public GameObject[] makeEffect;
     public GameObject[] ImpactAnim;
     public List<Transform>[] effectList;
-    //0.Àû°ø°İ 1.¹İ°İ 2~5 ½ºÅ³ 6 ¿­¼è 7 ÈúÆÑ¸Ó±İ 8¶óÀÌÆ®´× 9ºÒ±æ 10Æø¹ß
+    //0.ì ê³µê²© 1.ë°˜ê²© 2~5 ìŠ¤í‚¬ 6 ì—´ì‡  7 ííŒ©ë¨¸ê¸ˆ 8ë¼ì´íŠ¸ë‹ 9ë¶ˆê¸¸ 10í­ë°œ
     public int[] effectCount;
     public Transform effectManageToShow(int a)
     {
@@ -110,8 +110,8 @@ public class MapManager : MonoBehaviour
     public GameObject buffUIset;
     public Transform buffUITransform()
     {
-        //ÀÚ¹öÇÁ, À¯ÀÍÇÑ¹öÇÁ, ÇØ·Î¿î¹öÇÁ
-        //°É¸°¼ø
+        //ìë²„í”„, ìœ ìµí•œë²„í”„, í•´ë¡œìš´ë²„í”„
+        //ê±¸ë¦°ìˆœ
         Transform tTemp;
         if (buffSetInvPenal.childCount > 0)
         {
@@ -206,7 +206,7 @@ public class MapManager : MonoBehaviour
                 buffList[i].myUI.parent = buffSetInvPenal;
                 for (int j = 0; j < 3; ++j)
                 {
-                    // ¹öÇÁ ²¨Áø°Í Å½»ö¿ë
+                    // ë²„í”„ êº¼ì§„ê²ƒ íƒìƒ‰ìš©
                     player.myAddState[j] -= buffList[i].addState[j];
                 }
                 for (int j = 0; j < 4; ++j)
@@ -245,7 +245,7 @@ public class MapManager : MonoBehaviour
         {
             switch (a)
             {
-                //³» ¾ÆÀÌÅÛ, ½ºÅİÃ¢
+                //ë‚´ ì•„ì´í…œ, ìŠ¤í…Ÿì°½
                 case 1:
                     showItemInfoInPopui(-1);
                     showItemInfoInPopui(selectItem);
@@ -363,13 +363,13 @@ public class MapManager : MonoBehaviour
 
         tTemp.GetChild(1).GetComponent<TextMeshProUGUI>().text = (id.lev >0) ? id.lev.ToString() : string.Empty;
         tTemp.GetChild(2).GetComponent<TextMeshProUGUI>().text = (id.lev > 0) ?
-              (((id.item.getItemDmg(id.lev) == 0) ? string.Empty : "°ø:" + id.item.getItemDmg(id.lev) +" ")
-              + ((id.item.getItemDef(id.lev) == 0) ? string.Empty : "¹æ:" + id.item.getItemDef(id.lev) + " ")
-              + ((id.item.getItemHp(id.lev) == 0) ? string.Empty : "Ã¼:" + id.item.getItemHp(id.lev)) + " ")
-            : (order < 0) ? "È¹µæ Àåºñ": "ºñ¾îÀÖÀ½";
+              (((id.item.getItemDmg(id.lev) == 0) ? string.Empty : "ê³µ:" + id.item.getItemDmg(id.lev) +" ")
+              + ((id.item.getItemDef(id.lev) == 0) ? string.Empty : "ë°©:" + id.item.getItemDef(id.lev) + " ")
+              + ((id.item.getItemHp(id.lev) == 0) ? string.Empty : "ì²´:" + id.item.getItemHp(id.lev)) + " ")
+            : (order < 0) ? "íšë“ ì¥ë¹„": "ë¹„ì–´ìˆìŒ";
         tTemp.GetChild(3).GetComponent<TextMeshProUGUI>().text = (id.lev > 0) ?
             id.item.infoText
-            : (order < 0) ? "¿­¼è¸¦ ÀÌ¿ëÇÏ¿©\n»óÀÚ·ÎºÎÅÍ Àåºñ¸¦\nÈ¹µæÇÏ¿©¾ß ÇÕ´Ï´Ù" : "Âø¿ëµÈ Àåºñ°¡\n¾ø½À´Ï´Ù";
+            : (order < 0) ? "ì—´ì‡ ë¥¼ ì´ìš©í•˜ì—¬\nìƒìë¡œë¶€í„° ì¥ë¹„ë¥¼\níšë“í•˜ì—¬ì•¼ í•©ë‹ˆë‹¤" : "ì°©ìš©ëœ ì¥ë¹„ê°€\nì—†ìŠµë‹ˆë‹¤";
     }
     public void changeItemSelect(int a)
     {
@@ -431,7 +431,7 @@ public class MapManager : MonoBehaviour
             keyCountText.text = (--keyCount).ToString();
             player.SkillTrigger(null, Skill.AtkKind.isBoxOpen);
             int itemGab = getTileStateGab(state, "itemBox");
-            //0Èú(¼Ò), 1Èú(´ë), 2ÇÏ±Ş¾ÆÀÌÅÛ 3»ó±Ş¾ÆÀÌÅÛ 4ÃÖ»ó±Ş
+            //0í(ì†Œ), 1í(ëŒ€), 2í•˜ê¸‰ì•„ì´í…œ 3ìƒê¸‰ì•„ì´í…œ 4ìµœìƒê¸‰
             switch (itemGab)
             {
                 case 0:
@@ -608,8 +608,8 @@ public class MapManager : MonoBehaviour
             updateSetting();
             if (TURN == 0 || TURN == 2 || TURN == 3)
             {
-                //0 ³ª¸¸ 2 Àûµµ 3 Ãß°¡
-                //³ª¸¸ Çàµ¿
+                //0 ë‚˜ë§Œ 2 ì ë„ 3 ì¶”ê°€
+                //ë‚˜ë§Œ í–‰ë™
                 int input = findKey();
                 if (input >= 0)
                 {
@@ -647,7 +647,7 @@ public class MapManager : MonoBehaviour
                         {
                             turnAnim.SetTrigger("Emove");
                             nextTurnStart = Time.time + 0.8f;
-                            //Àû¸¸Çàµ¿
+                            //ì ë§Œí–‰ë™
                             TURN = 9;
                             Mm.moveMonsters();
                         }
@@ -674,7 +674,7 @@ public class MapManager : MonoBehaviour
                     TurnSound[1].Play();
                     TURNcolor.color = colorSet[1];
                 }
-                //Ãß°¡ ±âÈ¸ È¹µæ
+                //ì¶”ê°€ ê¸°íšŒ íšë“
             }
             else
             {
@@ -701,7 +701,7 @@ public class MapManager : MonoBehaviour
                             checkGetItem(playerMove);
                             if (Random.Range(0, 10) < player.myState[1])
                             {
-                                //Ãß°¡±âÈ¸
+                                //ì¶”ê°€ê¸°íšŒ
                                 TURN = 3;
                                 TurnSound[2].Play();
                                 TURNcolor.color = colorSet[2];
@@ -721,7 +721,7 @@ public class MapManager : MonoBehaviour
                         }
                         break;
                     case 9:
-                        //Àû Çàµ¿
+                        //ì  í–‰ë™
                         if (Monster.setCounter <= 0 || nextTurnStart <= Time.time)
                         {
                             TURN = -1;
@@ -730,7 +730,7 @@ public class MapManager : MonoBehaviour
                         }
                         break;
                     case 13:
-                        //Àû °ø°İ
+                        //ì  ê³µê²©
                         if (Mm.atkEnemy.Count > 0)
                         {
                             try
@@ -770,7 +770,7 @@ public class MapManager : MonoBehaviour
                         }
                         break;
                 }
-                //Å¸ÀÌ¹ÖÀ» ±â´Ù¸®´Â Áß
+                //íƒ€ì´ë°ì„ ê¸°ë‹¤ë¦¬ëŠ” ì¤‘
             }
             yield return fixWs;
         }
@@ -814,11 +814,11 @@ public class MapManager : MonoBehaviour
             if (a < 0) return;
             if (skillLev[a] >= 4)
             {
-                ShowCenterText("ÃÖ´ë ´Ü°èÀÔ´Ï´Ù!");
+                ShowCenterText("ìµœëŒ€ ë‹¨ê³„ì…ë‹ˆë‹¤!");
             }
             else
             {
-                //½ºÅ³ ·¡º§¾÷
+                //ìŠ¤í‚¬ ë˜ë²¨ì—…
                 skillLev[a]++;
                 skillLevCheck(a);
                 checkSkillUp = false;
@@ -833,12 +833,12 @@ public class MapManager : MonoBehaviour
             {
                 if(player.mySkillSet[a].kind[0] == Skill.AtkKind.atkTrigger)
                 {
-                    ShowCenterText("»ç¿ëÇÒ ¼ö ¾ø´Â ±â¼úÀÔ´Ï´Ù.");
+                    ShowCenterText("ì‚¬ìš©í•  ìˆ˜ ì—†ëŠ” ê¸°ìˆ ì…ë‹ˆë‹¤.");
                     return;
                 }
                 if(CoolTime[a] > 0)
                 {
-                    ShowCenterText("ÁØºñµÇÁö ¾Ê¾Ò½À´Ï´Ù!");
+                    ShowCenterText("ì¤€ë¹„ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤!");
                     return;
                 }
             }
@@ -925,7 +925,7 @@ public class MapManager : MonoBehaviour
         }
         enemyLevupBack.sprite = enemyLevupBackImg[levCount];
     }
-    //0ÆòÅ¸ 1Q 2W 3E
+    //0í‰íƒ€ 1Q 2W 3E
     public int[] skillLev;
     public void skillLevCheck(int a)
     {
@@ -950,16 +950,16 @@ public class MapManager : MonoBehaviour
         switch (a)
         {
             case 0:
-                //³ª¸¸ Çàµ¿
+                //ë‚˜ë§Œ í–‰ë™
                 MonsterManager.monstSetting = true;
                 Mm.changeMonstersWeight();
                 return 1;
             case 2:
-                //Àûµµ Çàµ¿
+                //ì ë„ í–‰ë™
                 Mm.StartCoroutine("mobSetting");
                 return 8;
             case 3:
-                //Ãß°¡±âÈ¸ È¹µæ
+                //ì¶”ê°€ê¸°íšŒ íšë“
                 return 6;
             default:
                 return 8;
@@ -1069,7 +1069,7 @@ public class MapManager : MonoBehaviour
                 break;
             case 3:
                 player.anim.SetTrigger("Jump");
-                ShowCenterText("½ÃÀÛ!");
+                ShowCenterText("ì‹œì‘!");
                 TURN = 0;
                 break;
         }
@@ -1164,9 +1164,9 @@ public class MapManager : MonoBehaviour
         pointerParticle.gameObject.SetActive(false);
     }
 
-    [Header("ÀÔ·Â °ü¸®")]
+    [Header("ì…ë ¥ ê´€ë¦¬")]
     public bool canMove;
-    //0, 1, 2, 3 # 4.Ã¤Å©½ÃÀÛÇÑ ½Ã°£(ÇÒÁö°í¹Î)
+    //0, 1, 2, 3 # 4.ì±„í¬ì‹œì‘í•œ ì‹œê°„(í• ì§€ê³ ë¯¼)
     public float[] inputQueue = new float[4];
     public float timeGap;
     public void getMoveKey(int a)
@@ -1181,7 +1181,7 @@ public class MapManager : MonoBehaviour
     {
         int gab = -1;
         float findKey = Time.time - timeGap;
-        float max = findKey; //ÃÖ¼Ò À¯È¿ÀÔ·Â½Ã°£
+        float max = findKey; //ìµœì†Œ ìœ íš¨ì…ë ¥ì‹œê°„
         for(int i = 0; i<4; ++i)
         {
             if(findKey < inputQueue[i])
@@ -1196,7 +1196,7 @@ public class MapManager : MonoBehaviour
         }
         return gab;
     }
-    [Header("¸Ê µ¥ÀÌÅÍ")]
+    [Header("ë§µ ë°ì´í„°")]
     [SerializeField]
     public TileNode[,] cMap;
     //public int[,] MapSort;
@@ -1204,7 +1204,7 @@ public class MapManager : MonoBehaviour
 
     public class TileNode
     {
-        public Transform tileTransform;    // Å¸ÀÏ »óÅÂ
+        public Transform tileTransform;    // íƒ€ì¼ ìƒíƒœ
         public Vector2Int pos;
         public int sort;
         public int tileState;
@@ -1229,9 +1229,9 @@ public class MapManager : MonoBehaviour
     public Transform maptiles;
     public Transform maptile;
     public GameObject blackStonePrefab;
-    #region ¸Ê»ı¼º
+    #region ë§µìƒì„±
     //public Maptile MonsterData;
-    //0 = ±æ, 1 = º®
+    //0 = ê¸¸, 1 = ë²½
     void GenerateWorld()
     {
         //int k, val, index;
@@ -1271,15 +1271,15 @@ public class MapManager : MonoBehaviour
         SpriteRenderer ChildOfTile = maptile.transform.GetChild(0).GetComponent<SpriteRenderer>();
         /*for (int i = 0; i < GM.mapData.maptileBlock.Length; ++i)
         {
-            frequencySum += GM.mapData.maptileBlock[i].useFreq; //Å¸ÀÏ »ç¿ëºóµµ ÇÕ ±¸ÇØ¼­ ³ÖÀ½
+            frequencySum += GM.mapData.maptileBlock[i].useFreq; //íƒ€ì¼ ì‚¬ìš©ë¹ˆë„ í•© êµ¬í•´ì„œ ë„£ìŒ
         }*/
         for (int i = 0; i < w; ++i)
         {
             for (int j = 0; j < h; ++j)
             {
                 if (i == 0 || i == w - 1 || j == 0 || j == h - 1) cMap[i,j].sort = 1;
-                //Vector3 tileSetting = new Vector3(1.27f / 2 * (j + i), 0.66f / 2 * (j - i) - 0.307f, 1f / 2 * (j - i) + 5); //¹Ù´Ú »ı¼º
-                Vector3 tileSetting = new Vector3(0.6f * (j + i), 0.35f * (j - i), 0); //¹Ù´Ú »ı¼º
+                //Vector3 tileSetting = new Vector3(1.27f / 2 * (j + i), 0.66f / 2 * (j - i) - 0.307f, 1f / 2 * (j - i) + 5); //ë°”ë‹¥ ìƒì„±
+                Vector3 tileSetting = new Vector3(0.6f * (j + i), 0.35f * (j - i), 0); //ë°”ë‹¥ ìƒì„±
                 tileSetting.z = tileSetting.y;
                 cMap[i, j].tileTransform = Instantiate(blackStonePrefab, maptiles).transform;
                 cMap[i, j].tileTransform.localPosition = tileSetting;
@@ -1302,7 +1302,7 @@ public class MapManager : MonoBehaviour
                     ChildOfTile.sprite = GM.mapData.spriteSet[Random.Range(0, GM.mapData.spriteSet.Length)];
                     //cMap[i, j].sort = MonsterData.maptileBlock[val].tileNum;
                     Transform gTemp = Instantiate(maptile, cMap[i, j].tileTransform);
-                    gTemp.localPosition = new Vector3(0, 0.75f, -10); //º® »ı¼º
+                    gTemp.localPosition = new Vector3(0, 0.75f, -10); //ë²½ ìƒì„±
                     gTemp.gameObject.SetActive(true);
                 }
                 else
@@ -1319,7 +1319,7 @@ public class MapManager : MonoBehaviour
                             cMap[i, j].sort = 1;
                             ChildOfTile.sprite = GM.mapData.spriteSet[Random.Range(0, GM.mapData.spriteSet.Length)];
                             Transform gTemp = Instantiate(maptile, cMap[i, j].tileTransform);
-                            gTemp.localPosition = new Vector3(0, 0.75f, -10); //º® »ı¼º
+                            gTemp.localPosition = new Vector3(0, 0.75f, -10); //ë²½ ìƒì„±
                             gTemp.gameObject.SetActive(true);
                         }
                     }
@@ -1331,7 +1331,7 @@ public class MapManager : MonoBehaviour
     public GameObject iTemBox;
     public List<Transform> iTemBoxList;
     public int itempointCounter;
-    //0Èú(¼Ò), 1Èú(´ë), 2ÇÏ±Ş¾ÆÀÌÅÛ 3»ó±Ş¾ÆÀÌÅÛ 4ÃÖ»ó±Ş
+    //0í(ì†Œ), 1í(ëŒ€), 2í•˜ê¸‰ì•„ì´í…œ 3ìƒê¸‰ì•„ì´í…œ 4ìµœìƒê¸‰
     public Sprite[] itemImg;
     public void makeItemBoxInMap(int count)
     {
@@ -1382,7 +1382,7 @@ public class MapManager : MonoBehaviour
                 tTemp.name = "item";
                 tTemp.localPosition = Vector3.up * 0.85f + Vector3.back * 0.1f;
                 cMap[vTemp.x, vTemp.y].tileState |= tileStateGab(TileState.Item);
-                //0Èú(¼Ò), 1Èú(´ë -º¸·ù-), 2ÇÏ±Ş¾ÆÀÌÅÛ 3»ó±Ş¾ÆÀÌÅÛ 4ÃÖ»ó±Ş
+                //0í(ì†Œ), 1í(ëŒ€ -ë³´ë¥˜-), 2í•˜ê¸‰ì•„ì´í…œ 3ìƒê¸‰ì•„ì´í…œ 4ìµœìƒê¸‰
                 int itemBoxGab = 0;
                 if(Random.Range(0, 7) > 2)
                 {
@@ -1484,7 +1484,7 @@ public class MapManager : MonoBehaviour
         return count;
     }
     #endregion
-    #region Å¸ÀÏÁ¤º¸°ª ÀĞ°í/¾²±â
+    #region íƒ€ì¼ì •ë³´ê°’ ì½ê³ /ì“°ê¸°
     public enum TileState { Item = 0 };
     public int tileStateGab(TileState what)
     {
@@ -1499,16 +1499,16 @@ public class MapManager : MonoBehaviour
     //itemBox, 
     public int setTileStateGab(int state,int gab, string a)
     {
-        // °ªÀÇ À§Ä¡¸¦ 0À¸·Î º¯°æ
-        // ÇØ´ç°ª°ú bit or ¿¬»ê
+        // ê°’ì˜ ìœ„ì¹˜ë¥¼ 0ìœ¼ë¡œ ë³€ê²½
+        // í•´ë‹¹ê°’ê³¼ bit or ì—°ì‚°
         Vector2Int filter = tileStateCodeFilter(a);
         state &= ~filter.x;
         return state | (gab << filter.y); 
     }
     public int getTileStateGab(int gab, string a)
     {
-        // ÇØ´ç À§Ä¡°ªÀ» 1°ú bit and
-        // ´Ù½Ã ¿øÀ§Ä¡ ÇØ¼­ µ¹·ÁÁÜ
+        // í•´ë‹¹ ìœ„ì¹˜ê°’ì„ 1ê³¼ bit and
+        // ë‹¤ì‹œ ì›ìœ„ì¹˜ í•´ì„œ ëŒë ¤ì¤Œ
         Vector2Int filter = tileStateCodeFilter(a);
         return (gab & filter.x) >> filter.y;
     }

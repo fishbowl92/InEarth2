@@ -7,10 +7,10 @@ using TMPro;
 
 public class StartManager : MonoBehaviour
 {
-    [Header("¼ÂÆÃ, ½ÃÀÛ ¹öÆ° Á¶À²")]
+    [Header("ì…‹íŒ…, ì‹œì‘ ë²„íŠ¼ ì¡°ìœ¨")]
     public Image back;
     Material backMaterial;
-    //0, ¼ÂÆÃÃ¢ 1, ½ÃÀÛÃ¢
+    //0, ì…‹íŒ…ì°½ 1, ì‹œì‘ì°½
     public GameObject[] settingAndStart;
     public GameManager GM;
     private void Awake()
@@ -76,7 +76,7 @@ public class StartManager : MonoBehaviour
         float fade;
         if (on > 0)
         {
-            //¹è°æ µ¤±â
+            //ë°°ê²½ ë®ê¸°
             fade = 0;
         }
         else
@@ -350,17 +350,17 @@ public class StartManager : MonoBehaviour
         {
             stateBar[i].value = GM.selChar.baseState[i] * 0.1f;
         }
-        string sTemp = "ÁÖ½ºÅİ: ";
+        string sTemp = "ì£¼ìŠ¤í…Ÿ: ";
         switch (GM.selChar.mainState)
         {
             case 1:
-                sTemp += "'¹ÎÃ¸'";
+                sTemp += "'ë¯¼ì²©'";
                 break;
             case 2:
-                sTemp += "'Áö´É'";
+                sTemp += "'ì§€ëŠ¥'";
                 break;
             default:
-                sTemp += "'±Ù·Â'";
+                sTemp += "'ê·¼ë ¥'";
                 break;
         }
 
@@ -396,9 +396,9 @@ public class StartManager : MonoBehaviour
         Item id = GM.returnItemData((int)(kan.position.z), kan.name);
         selItemInfo.GetChild(0).GetComponent<Image>().sprite = id.Img;
         selItemInfo.GetChild(1).GetComponent<TextMeshProUGUI>().text =
-              (((id.getItemDmg(1) == 0) ? string.Empty : "°ø:" + id.getItemDmg(1) + " ")
-              + ((id.getItemDef(1) == 0) ? string.Empty : "¹æ:" + id.getItemDef(1) + " ")
-              + ((id.getItemHp(1) == 0) ? string.Empty : "Ã¼:" + id.getItemHp(1)) + " ");
+              (((id.getItemDmg(1) == 0) ? string.Empty : "ê³µ:" + id.getItemDmg(1) + " ")
+              + ((id.getItemDef(1) == 0) ? string.Empty : "ë°©:" + id.getItemDef(1) + " ")
+              + ((id.getItemHp(1) == 0) ? string.Empty : "ì²´:" + id.getItemHp(1)) + " ");
         selItemInfo.GetChild(2).GetComponent<TextMeshProUGUI>().text = id.infoText;
 
     }
@@ -438,7 +438,7 @@ public class StartManager : MonoBehaviour
         }
         GM.addDoGamState[0] = (float)gab / have.childCount;
         addDoGamStateSlider[0].value = GM.addDoGamState[0];
-        addDoGamStateText[0].text = "Àåºñ µµ°¨ ´Ş¼º·ü º¸³Ê½º : ÇÇÇØ·® +" + (int)(GM.addDoGamState[0] * 50) + "%";
+        addDoGamStateText[0].text = "ì¥ë¹„ ë„ê° ë‹¬ì„±ë¥  ë³´ë„ˆìŠ¤ : í”¼í•´ëŸ‰ +" + (int)(GM.addDoGamState[0] * 50) + "%";
         addDoGamStateTextPerSent[0].text = (int)(GM.addDoGamState[0] * 100) + "%";
     }
     public void checkEnemyDataGage()
@@ -450,12 +450,12 @@ public class StartManager : MonoBehaviour
             Transform tTemp = ehave.GetChild(i);
             int gab = GM.mapData.monsterData[i].count;
             tTemp.GetChild(1).GetComponent<TextMeshProUGUI>().text = gab.ToString();
-            //ÃÖ´ë°ª 10000000
+            //ìµœëŒ€ê°’ 10000000
             hab += Mathf.Min(6, (int)Mathf.Log10(gab + 1));
         }
         GM.addDoGamState[1] = (float)hab / (i *  6);
         addDoGamStateSlider[1].value = GM.addDoGamState[1];
-        addDoGamStateText[1].text = "Àû±º µµ°¨ ´Ş¼º·ü º¸³Ê½º : ¹æ¾î·Â +" + (int)(GM.addDoGamState[1] * 50) + "%";
+        addDoGamStateText[1].text = "ì êµ° ë„ê° ë‹¬ì„±ë¥  ë³´ë„ˆìŠ¤ : ë°©ì–´ë ¥ +" + (int)(GM.addDoGamState[1] * 50) + "%";
         addDoGamStateTextPerSent[1].text = (int)(GM.addDoGamState[1] * 100) + "%";
     }
     public Slider[] addDoGamStateSlider;
@@ -463,7 +463,7 @@ public class StartManager : MonoBehaviour
     public TextMeshProUGUI[] addDoGamStateTextPerSent;
     public GameObject kans;
     public Transform have;
-    [ContextMenu("Ç×¸ñ »ı¼º")]
+    [ContextMenu("í•­ëª© ìƒì„±")]
     public void makeKans()
     {
         for(int i =0; i < GM.nomalItems1.Length; ++i)
@@ -540,7 +540,7 @@ public class StartManager : MonoBehaviour
 
     public GameObject ekans;
     public Transform ehave;
-    [ContextMenu("ÀûÇ×¸ñ »ı¼º")]
+    [ContextMenu("ì í•­ëª© ìƒì„±")]
     public void makeEnemyKans()
     {
         for(int i = 0; i < GM.mapData.monsterData.Length; ++i)
@@ -578,7 +578,7 @@ public class StartManager : MonoBehaviour
         GameObject check = (a == 0) ? settingPenal[2].gameObject : ((a == 1) ? settingPenal[0].gameObject : settingPenal[3].gameObject);
         WaitForSeconds ws = new WaitForSeconds(0.07f);
         text.text = "";
-        //À§¿¡¼­ºÎÅÍ 1, 2, 0, 3
+        //ìœ„ì—ì„œë¶€í„° 1, 2, 0, 3
         for (int i = 0; i < sTemp.Length; ++i)
         {
             if (!check.activeSelf) break;
@@ -590,7 +590,7 @@ public class StartManager : MonoBehaviour
         if (check.activeSelf) yield return new WaitForSeconds(1.8f);
         talkBox[a].gameObject.SetActive(false);
     }
-    #region Æ¯¼ºÄ­
+    #region íŠ¹ì„±ì¹¸
     public GameObject expPoint;
     public Transform expStartPoint;
     public Transform expGetPoint;
@@ -621,7 +621,7 @@ public class StartManager : MonoBehaviour
     public TextMeshProUGUI namPlayerEXPData;
     public void checkPlayerEXPdata()
     {
-        namPlayerEXPData.text = "¼ÒÀ¯ÁßÀÎ °æÇèÄ¡ : " + GM.myExpData;
+        namPlayerEXPData.text = "ì†Œìœ ì¤‘ì¸ ê²½í—˜ì¹˜ : " + GM.myExpData;
     }
     public void getExpPoint()
     {
@@ -683,7 +683,7 @@ public class StartManager : MonoBehaviour
 
                 if (j >= GM.selChar.myTraitData[i].tds.Length)
                 {
-                    //Á¸ÀçÇÏÁö ¾Ê´Â 
+                    //ì¡´ì¬í•˜ì§€ ì•ŠëŠ” 
                     tKan.gameObject.SetActive(false);
                 }
                 else
@@ -692,10 +692,10 @@ public class StartManager : MonoBehaviour
                     tKan.GetChild(0).GetComponent<Image>().sprite = GM.selChar.myTraitData[i].tds[j].img;
                     if (manjok)
                     {
-                        //¿ä±¸·¹º§À» ¸¸Á·
+                        //ìš”êµ¬ë ˆë²¨ì„ ë§Œì¡±
                         if (sel < 0)
                         {
-                            //¼±ÅÃµÈ°Ô ¾øÀ½
+                            //ì„ íƒëœê²Œ ì—†ìŒ
                             tKan.GetComponent<Image>().color = Color.yellow;
                             tKan.GetChild(0).GetComponent<Image>().color = Color.white;
                         }
@@ -722,10 +722,10 @@ public class StartManager : MonoBehaviour
                 tKan.GetChild(0).GetComponent<Image>().sprite = GM.selChar.myTraitData[i].tds[j].img;
                 if (manjok)
                 {
-                    //¿ä±¸·¹º§À» ¸¸Á·
+                    //ìš”êµ¬ë ˆë²¨ì„ ë§Œì¡±
                     if (sel < 0)
                     {
-                        //¼±ÅÃµÈ°Ô ¾øÀ½
+                        //ì„ íƒëœê²Œ ì—†ìŒ
                         tKan.GetComponent<Image>().color = Color.yellow;
                         tKan.GetChild(0).GetComponent<Image>().color = Color.white;
                     }
@@ -777,7 +777,7 @@ public class StartManager : MonoBehaviour
         GM.makePlayerTraitData();
     }
     #endregion
-    #region »óÁ¡Ä­
+    #region ìƒì ì¹¸
     public Sprite[] tileImg;
     public int[] myItemCount;
     public int[] selectTileList;
@@ -831,7 +831,7 @@ public class StartManager : MonoBehaviour
         GM.btnSound[0].Play();
         selectTileList[i] = index;
         t.GetChild(0).GetComponent<TextMeshProUGUI>().text = "x" + (--myItemCount[index]);
-        nanidoText.text = "³­ÀÌµµ(" + (i + 1) + ") // °á°úº¸»ó È¹µæ : + " + 10* (i + 1) + "%";
+        nanidoText.text = "ë‚œì´ë„(" + (i + 1) + ") // ê²°ê³¼ë³´ìƒ íšë“ : + " + 10* (i + 1) + "%";
         Tileitems.GetChild(i).GetChild(0).GetComponent<Image>().sprite = tileImg[index];
     }
     public void resetSellTileBlock()
@@ -844,7 +844,7 @@ public class StartManager : MonoBehaviour
             selectTileList[i] = 0;
             ItemsPenal.GetChild(gab - 1).GetChild(0).GetComponent<TextMeshProUGUI>().text = "x" + ++myItemCount[gab];
         }
-        nanidoText.text = "³­ÀÌµµ(0) // °á°úº¸»ó È¹µæ : + 10%";
+        nanidoText.text = "ë‚œì´ë„(0) // ê²°ê³¼ë³´ìƒ íšë“ : + 10%";
     }
     public TextMeshProUGUI myGemCounter;
     public Sprite[] itemSprites;
@@ -874,7 +874,7 @@ public class StartManager : MonoBehaviour
                 case -2:
                 case -3:
                 case -4:
-                    //°æÇèÄ¡ È¹µæ
+                    //ê²½í—˜ì¹˜ íšë“
                     GM.myExpData += 1000;
                     expCheck();
                     getItemImage.sprite = itemSprites[0];
@@ -895,7 +895,7 @@ public class StartManager : MonoBehaviour
         GM.makePlayerExpData();
     }
 
-    [ContextMenu("¾ÆÀÌÅÛ Å¸ÀÏ Ç×¸ñ »ı¼º")]
+    [ContextMenu("ì•„ì´í…œ íƒ€ì¼ í•­ëª© ìƒì„±")]
     public void makeItemTileContens()
     {
         myItemCount = new int[tileImg.Length];

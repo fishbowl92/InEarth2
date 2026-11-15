@@ -10,11 +10,11 @@ public class Monster : MonoBehaviour
     public SpriteRenderer img;
 
     public string monsterName;
-    public int code;        // ¸ó½ºÅÍ ¹øÈ£
+    public int code;        // ëª¬ìŠ¤í„° ë²ˆí˜¸
     public int hp;
     public int Maxhp;
     public int sCount;
-    public int lifeCycle;  // ¸ó½ºÅÍ »ı¸íÁÖ±â
+    public int lifeCycle;  // ëª¬ìŠ¤í„° ìƒëª…ì£¼ê¸°
     public Vector2Int monsterLocatePos;
     public Vector2Int monsterLocatePos2;
     //public NDArray monsterAndPlayerMoveLimit = np.zeros(29, 29);
@@ -69,7 +69,7 @@ public class Monster : MonoBehaviour
                 result[i].gab = nTemp[i];
             }
             //softMax();
-            //prebOutPut, ¹İÈ¯°ªÀ» ÅëÇÑ ¿òÁ÷ÀÓ ½ÃÀÛ
+            //prebOutPut, ë°˜í™˜ê°’ì„ í†µí•œ ì›€ì§ì„ ì‹œì‘
         }
         result.Sort(delegate (sortVector2 a, sortVector2 b)
         {
@@ -322,7 +322,7 @@ public class Monster : MonoBehaviour
             return;
         }
         a = Mathf.Max(1, a);
-        Transform temp = Mapm.showDmg(a,0); //0 -µ¥¹ÌÁö ÁÜ, 1- µ¥¹ÌÁö ¹ŞÀ½ 2- È¸º¹
+        Transform temp = Mapm.showDmg(a,0); //0 -ë°ë¯¸ì§€ ì¤Œ, 1- ë°ë¯¸ì§€ ë°›ìŒ 2- íšŒë³µ
         //Vector3 p = transform.position + Vector3.forward * temp.position.z;
         Mapm.player.SkillTrigger(this, Skill.AtkKind.monsterIsHit, new Vector3Int(a, 0, skillNum));
         temp.position = new Vector3(transform.position.x + Random.Range(-0.1f, 0.1f),

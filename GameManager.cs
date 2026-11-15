@@ -113,7 +113,7 @@ public class GameManager : MonoBehaviour
     }
     public Item returnItemData(int num, string name)
     {
-        //0.³ë¸», 1.·¹¾î, 2.È÷µç
+        //0.ë…¸ë§, 1.ë ˆì–´, 2.íˆë“ 
         Item[] iList;
         switch (num)
         {
@@ -287,7 +287,7 @@ public class GameManager : MonoBehaviour
         return h;
     }
 
-    [ContextMenu("³ë¸Ö ¾ÆÀÌÅÛ ¼ÂÆÃ")]
+    [ContextMenu("ë…¸ë©€ ì•„ì´í…œ ì…‹íŒ…")]
     public void settingNomalItemSet()
     {
         Item[] items = Resources.LoadAll<Item>("Items/Nomal");
@@ -325,7 +325,7 @@ public class GameManager : MonoBehaviour
         }
         
     }
-    [ContextMenu("¾ÆÀÌÅÛ ¼ÂÆÃ")]
+    [ContextMenu("ì•„ì´í…œ ì…‹íŒ…")]
     public void settingAllItemSet()
     {
         Item[] Normal_items = Resources.LoadAll<Item>("Items/Nomal");

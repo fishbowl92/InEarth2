@@ -12,12 +12,12 @@ public class Player : MonoBehaviour
     public Transform Img;
     public Animator anim;
 
-    public int mainState;   // ÁÖ½ºÅÈ
-    public int[] myState;   // ½ºÅÈ : Èû(Strenght), ¹ÎÃ¸(Dexterity), Áö´É(Intelligence)
+    public int mainState;   // ì£¼ìŠ¤íƒ¯
+    public int[] myState;   // ìŠ¤íƒ¯ : í˜(Strenght), ë¯¼ì²©(Dexterity), ì§€ëŠ¥(Intelligence)
     public int[] myAddState;
-    public int[] psvState;  // ±âº» ½ºÅÈ
+    public int[] psvState;  // ê¸°ë³¸ ìŠ¤íƒ¯
     public Skill basicSkill;
-    //0Àº ¹«Á¶°Ç ÆòÅ¸
+    //0ì€ ë¬´ì¡°ê±´ í‰íƒ€
     public Skill[] mySkillSet;
     public int skillPoint;
     public int keyGetPercentage;
@@ -217,13 +217,13 @@ public class Player : MonoBehaviour
         switch (n)
         {
             case -1:
-                //¹İ°İ
+                //ë°˜ê²©
                 SkillTrigger(null, Skill.AtkKind.isCounter,new Vector3Int(Mapm.playerMove.x,Mapm.playerMove.y,0));
                 dmg = (int)((1 + GetPLayerBaseDmg() / 2) * (1 + dmgUp[4]));
                 break;
             default:
-                //ÆòÅ¸
-                //½ºÅ³
+                //í‰íƒ€
+                //ìŠ¤í‚¬
                 dmg = (int)(mySkillSet[n].baseDmg[Mapm.skillLev[n]] * lev + mySkillSet[n].dmg[Mapm.skillLev[n]] * GetPLayerBaseDmg() * (1 + dmgUp[n]));
                 break;
         }
@@ -271,7 +271,7 @@ public class Player : MonoBehaviour
         }
         return (int)Mathf.Max(5, ml);
     }
-    #region Æ®¸®°ÅÃ¤Å©
+    #region íŠ¸ë¦¬ê±°ì±„í¬
     public void SkillTrigger(Monster m, AtkKind a, Vector3Int Data = new Vector3Int())
     {
         if(a == AtkKind.killEnemy)
@@ -350,7 +350,7 @@ public class Player : MonoBehaviour
 
     public void PlayerSkill(Vector2Int bp, int r, int n)
     {
-        //r:¹æÇâ n:½ºÅ³¹øÈ£ 0(ÆòÅ¸)
+        //r:ë°©í–¥ n:ìŠ¤í‚¬ë²ˆí˜¸ 0(í‰íƒ€)
         //0  1
         //2  3
         Skill sTemp = mySkillSet[n];
@@ -411,17 +411,17 @@ public class Player : MonoBehaviour
         }
     }
     #endregion
-    #region ±â¼úÇÔ¼ö
+    #region ê¸°ìˆ í•¨ìˆ˜
     public void milleAtk(SkillData sData)
     {
         Mapm.atkSoundPlayer(sData.n + 2);
-        List<Vector2Int> ap = new List<Vector2Int>();   // ap ¾îÅÃÆ÷ÀÎÆ® : ¶§¸² ½ÃÀÛÇÏ´Â°÷(¿©±â¼­ ¶§¸²ÀÌ ÆÛÁ®³ª°£´Ù)
+        List<Vector2Int> ap = new List<Vector2Int>();   // ap ì–´íƒí¬ì¸íŠ¸ : ë•Œë¦¼ ì‹œì‘í•˜ëŠ”ê³³(ì—¬ê¸°ì„œ ë•Œë¦¼ì´ í¼ì ¸ë‚˜ê°„ë‹¤)
         for (int i = 0; i < sData.sTemp.atkPoint.Length; ++i)
         {
-            // r : ´©¸¥ ÀÌµ¿Å° ¹æÇâ
-            // bp : ½ºÅ³ ½ÃÀü ¹æÇâ
-            // p : °ø°İ µÇ´Â °÷
-            // n : ¸î¹øÂ° ½ºÅ³
+            // r : ëˆ„ë¥¸ ì´ë™í‚¤ ë°©í–¥
+            // bp : ìŠ¤í‚¬ ì‹œì „ ë°©í–¥
+            // p : ê³µê²© ë˜ëŠ” ê³³
+            // n : ëª‡ë²ˆì§¸ ìŠ¤í‚¬
             Vector2Int p = Skill.getRotatePoint((Vector2Int)sData.sTemp.atkPoint[i], sData.r) + sData.bp;
             MapManager.TileCheck tc = Mapm.getTileData(p);
             if(tc == MapManager.TileCheck.Empty || tc == MapManager.TileCheck.Enemy )
@@ -467,7 +467,7 @@ public class Player : MonoBehaviour
     
     public void nonTargetArrow(SkillData sData)
     {
-        //r:¹æÇâ n:½ºÅ³¹øÈ£ 0(ÆòÅ¸)
+        //r:ë°©í–¥ n:ìŠ¤í‚¬ë²ˆí˜¸ 0(í‰íƒ€)
         StartCoroutine("nonTargetArrowStart", sData);
         if (sData.sTemp.bulletEffect)
         {
@@ -621,7 +621,7 @@ public class Player : MonoBehaviour
     public int shild;
     public void PlayerAtk(Monster m, int c)
     {
-        //c. 0, ¹İ°İ
+        //c. 0, ë°˜ê²©
         m.APuDa(GetPlayerDmg(-1));
     }
     public bool PlayerGetDmg(Monster m)
@@ -771,7 +771,7 @@ public class Player : MonoBehaviour
                 Mapm.buffList[i].myUI.parent = Mapm.buffSetInvPenal;
                 for (int j = 0; j < 3; ++j)
                 {
-                    // ¹öÇÁ ²¨Áø°Í Å½»ö¿ë
+                    // ë²„í”„ êº¼ì§„ê²ƒ íƒìƒ‰ìš©
                     myAddState[j] -= Mapm.buffList[i].addState[j];
                 }
                 SkillTrigger(null, AtkKind.isBuffOff);

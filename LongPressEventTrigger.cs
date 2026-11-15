@@ -5,7 +5,7 @@ using System.Collections;
  
 public class LongPressEventTrigger : UIBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerExitHandler
 {
-    [Tooltip("¿À·¡´©¸£±â°¡ ½ÇÇàµÇ·Á¸é ¹öÆ°´©¸£±â¸¦ Áö¼ÓÇØ¾ßµÇ´Â ½Ã°£")]
+    [Tooltip("ì˜¤ë˜ëˆ„ë¥´ê¸°ê°€ ì‹¤í–‰ë˜ë ¤ë©´ ë²„íŠ¼ëˆ„ë¥´ê¸°ë¥¼ ì§€ì†í•´ì•¼ë˜ëŠ” ì‹œê°„")]
     public float durationThreshold = 0.5f;
 
     public UnityEvent onLongPress = new UnityEvent();
