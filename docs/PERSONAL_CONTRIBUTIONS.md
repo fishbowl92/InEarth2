@@ -10,7 +10,19 @@
 
 팀 프로젝트의 전체 코드 중 설명할 수 있는 개인 기여를 분리한 안내입니다. 아래 역할 구분은 개발자의 당시 경험 설명을 기준으로 하며, 파일 전체나 업로드 커밋의 작성자가 모든 기능의 단독 구현자라는 뜻은 아닙니다. 코드는 당시 보존 커밋에 고정된 링크로 연결합니다.
 
-## 1. 연쇄 번개 — 공동 설계·구현 방식 논의 및 수정
+## 1. 스킬·게임 데이터 — 직접 구현
+
+스킬, 캐릭터, 아이템, 특성 데이터를 ScriptableObject로 정의해 기획 수치를 코드와 분리했습니다. 스킬은 공격 종류(`AtkKind`), 범위, 쿨타임, 피해량, 연출 리소스를 데이터로 갖고, 발동 시점에 맞춰 효과 함수를 이벤트로 연결합니다.
+
+| 순서 | 바로 볼 코드 | 확인할 내용 |
+| --- | --- | --- |
+| 1 | [`Skill` 데이터 정의](https://github.com/fishbowl92/InEarth2/blob/b54ad4b56a68a735fa90aa5748edd3a3a426668f/ScriptTable/Skill.cs#L8-L60) | 공격 종류·범위·쿨타임·피해량·연출 리소스와 효과 이벤트(`skillEvent`) |
+| 2 | [스킬 효과 함수](https://github.com/fishbowl92/InEarth2/blob/b54ad4b56a68a735fa90aa5748edd3a3a426668f/ScriptTable/Skill.cs#L141-L387) | 회복, 열쇠 획득, 버프, 장판, 처치 시 효과 등 개별 효과 |
+| 3 | [`Character`](https://github.com/fishbowl92/InEarth2/blob/b54ad4b56a68a735fa90aa5748edd3a3a426668f/ScriptTable/Character.cs) · [`Item`](https://github.com/fishbowl92/InEarth2/blob/b54ad4b56a68a735fa90aa5748edd3a3a426668f/ScriptTable/Item.cs) · [`Trait`](https://github.com/fishbowl92/InEarth2/blob/b54ad4b56a68a735fa90aa5748edd3a3a426668f/ScriptTable/Trait.cs) | 캐릭터 능력치·기본 스킬, 아이템 발동 조건과 수치, 특성 이벤트 |
+
+`Skill.cs` 안의 `ChainLightning`은 아래 2번의 공동 작업 항목입니다.
+
+## 2. 연쇄 번개 — 공동 설계·구현 방식 논의 및 수정
 
 ### 담당한 판단
 
@@ -30,7 +42,7 @@
 
 코루틴은 별도 스레드가 아닙니다. `yield`에서 실행을 양보할 뿐, 전체 연산량을 자동으로 줄이거나 순간적인 처리 지연을 보장해 없애는 도구는 아닙니다. 이 코드에서는 타격과 연출의 순서를 표현하는 실행 구조로 확인해야 합니다.
 
-## 2. 랜덤 맵 — 기획 단계의 생성 방식 제안
+## 3. 랜덤 맵 — 기획 단계의 생성 방식 제안
 
 주변 타일 상태를 반복 반영하는 맵 생성 아이디어를 제안했습니다. 아래 코드는 프로젝트에 반영된 흐름을 확인하기 위한 자료이며, 맵 생성 코드 전체를 단독 작성한 것으로 주장하지 않습니다.
 
