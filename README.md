@@ -18,6 +18,7 @@ Unity와 C#으로 제작한 팀 게임 프로젝트의 스크립트 보존 저�
 | 대표 기능 | 개인 기여 범위 | 코드 바로 보기 |
 | --- | --- | --- |
 | 연쇄 번개 | 공동 설계·구현 방식 논의 및 수정 | [`makeChainLight`](https://github.com/fishbowl92/InEarth2/blob/5cafabbce2eee3206fa55703ac156531e233c3f6/Player.cs#L786-L812) |
+| 스킬·게임 데이터 | 직접 구현 (ScriptableObject 스킬·캐릭터·아이템·특성 데이터와 스킬 효과 함수) | [`Skill`](https://github.com/fishbowl92/InEarth2/blob/b54ad4b56a68a735fa90aa5748edd3a3a426668f/ScriptTable/Skill.cs#L8-L60) · [`Character`](https://github.com/fishbowl92/InEarth2/blob/b54ad4b56a68a735fa90aa5748edd3a3a426668f/ScriptTable/Character.cs) · [`Item`](https://github.com/fishbowl92/InEarth2/blob/b54ad4b56a68a735fa90aa5748edd3a3a426668f/ScriptTable/Item.cs) · [`Trait`](https://github.com/fishbowl92/InEarth2/blob/b54ad4b56a68a735fa90aa5748edd3a3a426668f/ScriptTable/Trait.cs) |
 | 랜덤 맵 | 기획 단계의 생성 방식 제안 | [`GenerateWorld`](https://github.com/fishbowl92/InEarth2/blob/5cafabbce2eee3206fa55703ac156531e233c3f6/MapManager.cs#L1235-L1270) |
 
 팀 전체 코드와 개인 기여를 구분했습니다. 아래 프로젝트 코드 개요는 맥락 설명이며, 파일 전체를 단독 작성했다는 의미는 아닙니다.
@@ -33,10 +34,11 @@ Unity와 C#으로 제작한 팀 게임 프로젝트의 스크립트 보존 저�
 
 ## 담당 및 기여 범위
 
+- 스킬·캐릭터·아이템·특성 데이터를 ScriptableObject로 정의하고, 스킬 효과 함수 직접 구현
 - 주변 타일 상태를 반복 반영하는 랜덤 맵 생성 방식 제안
 - 공동 개발자와 연쇄 번개의 처리 시점·대상 탐색·연출 순서를 논의하고 수정
 
-랜덤 맵은 기획 단계의 아이디어 기여, 연쇄 번개는 공동 개발 항목입니다. 다른 기능은 아래 코드 개요에서 프로젝트 맥락으로 안내합니다.
+스킬·게임 데이터는 직접 구현, 랜덤 맵은 기획 단계의 아이디어 기여, 연쇄 번개는 공동 개발 항목입니다. 다른 기능은 아래 코드 개요에서 프로젝트 맥락으로 안내합니다.
 
 ## 프로젝트 코드 개요
 
